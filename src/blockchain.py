@@ -44,18 +44,18 @@ class Blockchain:
         start_time = time.time()
         timestamp = time.time()
         while True: 
-            hash = self.hash_block(data, previous_hash, nonce, timestamp)
-            if hash.startswith(target):
+            attempts += 1
+            block_hash = self.hash_block(data, previous_hash, nonce, timestamp)
+            if block_hash.startswith(target):
                 break
             nonce += 1
-            attempts += 1
         
         end_time = time.time()
         elapsed_time = end_time - start_time
 
         result = {
             "nonce": nonce,
-            "hash": hash,
+            "hash": block_hash,
             "timestamp":  timestamp,
             "elapsed_time": elapsed_time,
             "attempts": attempts
